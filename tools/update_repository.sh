@@ -34,8 +34,8 @@ for REPO in "$WEBROOT"/*/; do
     # Wenn mindestens ein ZIP gefunden wurde, create_repository.py aufrufen
     if [ ${#ZIP_ARGS[@]} -gt 0 ]; then
         echo "Running create_repository.py for repo $REPO_NAME with ZIPs: ${ZIP_ARGS[*]}"
-        echo $REPOTOOL --datadir "$WEBROOT/$REPO" "${ZIP_ARGS[@]}"
-        $REPOTOOL --datadir "$WEBROOT/$REPO" "${ZIP_ARGS[@]}"
+        echo $REPOTOOL --datadir "$REPO" "${ZIP_ARGS[@]}"
+        $REPOTOOL --datadir "$REPO" "${ZIP_ARGS[@]}"
     else
         echo "  No ZIPs found in repo $REPO_NAME"
     fi
