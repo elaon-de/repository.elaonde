@@ -31,7 +31,7 @@ process-changed-zip:
     - when: never
   image: alpine:latest
   script:
-    - apk add --no-cache git python3 py3-pip
+    - apk add --no-cache git python3 py3-pip bash
     - git fetch origin main
     - ./tools/update_repository.sh
     - git config --global user.email "ci@git.elaon.de"
