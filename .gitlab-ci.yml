@@ -1,5 +1,6 @@
 stages:
   - test
+  - release
 
 
 
@@ -22,3 +23,33 @@ test:
     # - xmllint -noout webroot/repo-testing/addons.xml
 
 
+process-changed-zip:
+  stage: release
+  rules:
+    # Nur bei Push-Pipelines auf main
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_AUTHOR != "Alex. F. (CI)"'
+      when: on_success
+    # Alle anderen Fälle überspringen
+    - when: never
+  image: python:3.11
+  script:
+    - apk add --no-cache git
+    - git fetch origin main
+    - CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+    - echo "Changed files: $CHANGED_FILES"
+    - ZIP_PATH=$(echo "$CHANGED_FILES" | grep -E '^webroot/.+\.zip$' || true)
+    - if [ -n "$ZIP_PATH" ]; then
+        DATADIR=$(echo "$ZIP_PATH" | cut -d'/' -f2);
+        echo "Found ZIP: $ZIP_PATH, datadir: $DATADIR";
+        ./tools/create_repository.py --datadir webroot/$DATADIR/ $ZIP_PATH;
+      else
+        echo "No ZIP file changed";
+      fi
+    - git config --global user.email "ci@git.elaon.de"
+    - git config --global user.name "Alex. F. (CI)"
+    - git add .
+    - git commit -m "Update repo $DATADIR for $ZIP_PATH"
+    - git remote set-url origin https://$GITHUB_TOKEN@github.com/elaon-de/repository.elaonde.git
+    - git push origin main
+    - git remote set-url origin https://gitlab-ci-token:$CI_JOB_TOKEN@git.elaon.de/alex/repository.elaonde.git
+    - git push origin main
