@@ -1,13 +1,41 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-echo "Changed files: $CHANGED_FILES"
-ZIP_PATH=$(echo "$CHANGED_FILES" | grep -E '^webroot/.+\.zip$' || true)
+WEBROOT="webroot"
+TOOLS="./tools/create_repository.py"
 
-if [ -n "$ZIP_PATH" ]; then
-    DATADIR=$(echo "$ZIP_PATH" | cut -d'/' -f2);
-    echo "Found ZIP $ZIP_PATH, datadir $DATADIR";
-    ./tools/create_repository.py --datadir webroot/$DATADIR/ $ZIP_PATH;
-else
-    echo "No ZIP file changed";
-fi
+# Gehe durch alle Repos in webroot (z.B. repo-testing, repo)
+for REPO in "$WEBROOT"/*/; do
+    REPO_NAME=$(basename "$REPO")
+    echo "Processing repo: $REPO_NAME"
+
+    ZIP_ARGS=()  # Array, um alle neuesten ZIPs in diesem Repo zu sammeln
+
+    # Gehe durch alle Addon-Unterordner im Repo
+    for ADDON in "$REPO"*/; do
+        ADDON_NAME=$(basename "$ADDON")
+        # Finde alle ZIP-Dateien im Addon-Ordner
+        ZIP_FILES=( "$ADDON"*.zip )
+
+        # Prüfen, ob ZIPs vorhanden sind
+        if [ ${#ZIP_FILES[@]} -eq 0 ]; then
+            echo "  No ZIPs in addon $ADDON_NAME"
+            continue
+        fi
+
+        # ZIP mit der höchsten Version ermitteln
+        # Annahme: Dateiname enthält Version am Ende, z.B. plugin.video.gronkhtv-1.2.3.zip
+        LATEST_ZIP=$(printf "%s\n" "${ZIP_FILES[@]}" | sort -V | tail -n1)
+        echo "  Latest ZIP for $ADDON_NAME: $LATEST_ZIP"
+
+        ZIP_ARGS+=( "$LATEST_ZIP" )
+    done
+
+    # Wenn mindestens ein ZIP gefunden wurde, create_repository.py aufrufen
+    if [ ${#ZIP_ARGS[@]} -gt 0 ]; then
+        echo "Running create_repository.py for repo $REPO_NAME with ZIPs: ${ZIP_ARGS[*]}"
+        $TOOLS --datadir "$REPO" "${ZIP_ARGS[@]}"
+    else
+        echo "  No ZIPs found in repo $REPO_NAME"
+    fi
+done
