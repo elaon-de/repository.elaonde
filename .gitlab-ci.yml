@@ -35,6 +35,7 @@ process-changed-zip:
     - git fetch origin main
     - ./tools/update_repository.sh
     #- git diff
+    - git branch
     - git config --global user.email "ci@git.elaon.de"
     - git config --global user.name "Alex. F. (CI)"
     - git add .
