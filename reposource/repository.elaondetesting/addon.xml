@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.elaondetesting"
+	name="ElaonDE Testing Add-on Repository"
+	version="1.0.0"
+	provider-name="Alexander F. (alex1702 | ElaonDE)">
+	<extension point="xbmc.addon.repository" name="ElaonDE Testing Add-on Repository">
+		<dir minversion="19.0.0">
+			<info>https://kodirepo.elaon.de/repo-testing/addons.xml</info>
+			<checksum>https://kodirepo.elaon.de/repo-testing/addons.xml.md5</checksum>
+			<datadir>https://kodirepo.elaon.de/repo-testing/</datadir>
+			<hashes>false</hashes>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="de_DE">ElaonDE Testing Add-on Repository</summary>
+		<summary lang="en_GB">ElaonDE Testing Add-on Repository</summary>
+		<description  lang="de_DE">Das Testing Repository enthält die neuste Version der Kodi Add-ons.</description>
+		<description  lang="en_GB">The Testing repository contains the newest version of the Kodi add-ons.</description>
+		<website>https://elaon.de/</website>
+		<email>alex+kodiaddon@elaon.de</email>
+		<source>https://github.com/elaon-de/repository.elaonde</source>
+		<assets>
+			<icon>icon.png</icon>
+		</assets>
+	</extension>
+</addon>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.elaonde"
+	name="ElaonDE Stable Add-on Repository"
+	version="1.0.0"
+	provider-name="Alexander F. (alex1702 | ElaonDE)">
+	<extension point="xbmc.addon.repository" name="ElaonDE Stable Add-on Repository">
+		<dir minversion="19.0.0">
+			<info>https://kodirepo.elaon.de/repo/addons.xml</info>
+			<checksum>https://kodirepo.elaon.de/repo/addons.xml.md5</checksum>
+			<datadir>https://kodirepo.elaon.de/repo/</datadir>
+			<hashes>false</hashes>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="de_DE">ElaonDE Stable Add-on Repository</summary>
+		<summary lang="en_GB">ElaonDE Stable Add-on Repository</summary>
+		<description  lang="de_DE">Das Stable Repository enthält die aktuelle stabile Version der Kodi Add-ons.</description>
+		<description  lang="en_GB">The Stable repository contains the current stable version of the Kodi add-ons.</description>
+		<website>https://elaon.de/</website>
+		<email>alex+kodiaddon@elaon.de</email>
+		<source>https://github.com/elaon-de/repository.elaonde</source>
+		<assets>
+			<icon>icon.png</icon>
+		</assets>
+	</extension>
+</addon>

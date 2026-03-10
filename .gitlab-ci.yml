@@ -1,0 +1,41 @@
+stages:
+  - test
+
+
+
+test:
+  stage: test
+  image: python:3.11
+  before_script:
+    - pip install --upgrade pip
+    - pip install lxml
+  script:
+    - echo "Linting reposource/repository.elaonde/addon.xml"
+    - |
+      python - <<EOF
+      from lxml import etree
+      etree.parse("reposource/repository.elaonde/addon.xml")
+      print("reposource/repository.elaonde/addon.xml ist gültiges XML")
+      EOF
+    - echo "Linting reposource/repository.elaondetesting/addon.xml"
+    - |
+      python - <<EOF
+      from lxml import etree
+      etree.parse("reposource/repository.elaondetesting/addon.xml")
+      print("reposource/repository.elaondetesting/addon.xml ist gültiges XML")
+      EOF
+    - echo "Linting webroot/repo/addons.xml"
+    - |
+      python - <<EOF
+      from lxml import etree
+      etree.parse("webroot/repo/addons.xml")
+      print("webroot/repo/addons.xml ist gültiges XML")
+      EOF
+    - echo "Linting webroot/repo-testing/addons.xml"
+    - |
+      python - <<EOF
+      from lxml import etree
+      etree.parse("webroot/repo-testing/addons.xml")
+      print("webroot/repo-testing/addons.xml ist gültiges XML")
+      EOF
+
