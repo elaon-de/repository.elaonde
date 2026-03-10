@@ -2,7 +2,7 @@
 set -euo pipefail
 
 WEBROOT="webroot"
-TOOLS="./tools/create_repository.py"
+REPOTOOL="./tools/create_repository.py"
 
 # Gehe durch alle Repos in webroot (z.B. repo-testing, repo)
 for REPO in "$WEBROOT"/*/; do
@@ -34,7 +34,7 @@ for REPO in "$WEBROOT"/*/; do
     # Wenn mindestens ein ZIP gefunden wurde, create_repository.py aufrufen
     if [ ${#ZIP_ARGS[@]} -gt 0 ]; then
         echo "Running create_repository.py for repo $REPO_NAME with ZIPs: ${ZIP_ARGS[*]}"
-        $TOOLS --datadir "$REPO" "${ZIP_ARGS[@]}"
+        $REPOTOOL --datadir "$WEBROOT/$REPO" "${ZIP_ARGS[@]}"
     else
         echo "  No ZIPs found in repo $REPO_NAME"
     fi
