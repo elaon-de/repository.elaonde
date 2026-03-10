@@ -14,17 +14,18 @@ for REPO in "$WEBROOT"/*/; do
     # Gehe durch alle Addon-Unterordner im Repo
     for ADDON in "$REPO"*/; do
         ADDON_NAME=$(basename "$ADDON")
+
         # Finde alle ZIP-Dateien im Addon-Ordner
         ZIP_FILES=( "$ADDON"*.zip )
 
-        # Prüfen, ob ZIPs vorhanden sind
-        if [ ${#ZIP_FILES[@]} -eq 0 ]; then
+        # Prüfen, ob ZIPs gefunden wurden
+        # ${ZIP_FILES[0]} == literal Glob, wenn keine Dateien existieren
+        if [ ! -e "${ZIP_FILES[0]}" ]; then
             echo "  No ZIPs in addon $ADDON_NAME"
             continue
         fi
 
         # ZIP mit der höchsten Version ermitteln
-        # Annahme: Dateiname enthält Version am Ende, z.B. plugin.video.gronkhtv-1.2.3.zip
         LATEST_ZIP=$(printf "%s\n" "${ZIP_FILES[@]}" | sort -V | tail -n1)
         echo "  Latest ZIP for $ADDON_NAME: $LATEST_ZIP"
 
