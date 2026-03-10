@@ -1,1 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version='1.0' encoding='UTF-8'?>
+<addons><addon id="plugin.video.gronkhtv" name="Gronkh.tv" version="1.0.0" provider-name="Alexander F. (alex1702 | ElaonDE)">
+    <requires>
+        <import addon="xbmc.python" version="3.0.1" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="de_DE">GronkhTV Streamarchiv</summary>
+        <summary lang="en_GB">GronkhTV Stream Archive</summary>
+        <description lang="de_DE">Zugriff auf das Streamarchiv https://gronkh.tv</description>
+        <description lang="en_GB">Access to the stream archive https://gronkh.tv</description>
+        <news>
+        v1.0.0
+        - First Version
+		</news>
+        <platform>all</platform>
+        <language>de en</language>
+        <license>MIT</license>
+        <source>https://github.com/elaon-de/plugin.video.gronkhtv</source>
+        <email>alex+kodiaddon@elaon.de</email>
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.png</fanart>
+            <banner>resources/banner.png</banner>
+            <screenshot>resources/screenshot1.jpg</screenshot>
+            <screenshot>resources/screenshot2.jpg</screenshot>
+            <screenshot>resources/screenshot3.jpg</screenshot>
+        </assets>
+    </extension>
+</addon></addons>
