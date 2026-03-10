@@ -37,6 +37,7 @@ for REPO in "$WEBROOT"/*/; do
         echo "Running create_repository.py for repo $REPO_NAME with ZIPs: ${ZIP_ARGS[*]}"
         echo $REPOTOOL --datadir "$REPO" "${ZIP_ARGS[@]}"
         $REPOTOOL --datadir "$REPO" "${ZIP_ARGS[@]}"
+        ls -la "$REPO"
     else
         echo "  No ZIPs found in repo $REPO_NAME"
     fi
