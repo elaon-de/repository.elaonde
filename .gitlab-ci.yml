@@ -35,7 +35,9 @@ process-changed-zip:
     - eval $(ssh-agent -s)
     - echo "$SSH_DEPLOY_KEY" | base64 -d | ssh-add -
     - mkdir -p ~/.ssh
-    - ssh-keyscan git.elaon.de >> ~/.ssh/known_hosts
+    - chmod 700 ~/.ssh
+    - ssh-keyscan git.elaon.de >> ~/.ssh/known_hosts 2>/dev/null
+    - chmod 644 ~/.ssh/known_hosts
     
     - git fetch origin main
     - git checkout -B main origin/main
