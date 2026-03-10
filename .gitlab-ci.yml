@@ -34,12 +34,13 @@ process-changed-zip:
     - apk add --no-cache git python3 py3-pip bash
     - git fetch origin main
     - ./tools/update_repository.sh
-    - git diff
-    # - git config --global user.email "ci@git.elaon.de"
-    # - git config --global user.name "Alex. F. (CI)"
-    # - git add .
-    # - git commit -m "Update repos"
-    # - git remote set-url origin https://$GITHUB_TOKEN@github.com/elaon-de/repository.elaonde.git
-    # - git push origin main
-    # - git remote set-url origin https://gitlab-ci-token:$CI_JOB_TOKEN@git.elaon.de/alex/repository.elaonde.git
-    # - git push origin main
+    #- git diff
+    - git config --global user.email "ci@git.elaon.de"
+    - git config --global user.name "Alex. F. (CI)"
+    - git add .
+    - git status
+    - git commit -m "Update repos"
+    - git remote set-url origin https://$GITHUB_TOKEN@github.com/elaon-de/repository.elaonde.git
+    - git push origin main
+    - git remote set-url origin https://gitlab-ci-token:$CI_JOB_TOKEN@git.elaon.de/alex/repository.elaonde.git
+    - git push origin main
