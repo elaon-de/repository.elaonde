@@ -36,7 +36,6 @@ process-changed-zip:
   image: alpine:latest
   script:
     - apk add --no-cache git python3 py3-pip bash openssh libxml2-utils
-    - eval $(ssh-agent -s)
     - echo "$SSH_DEPLOY_KEY" | base64 -d | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
@@ -52,7 +51,7 @@ process-changed-zip:
     - git config --global user.name "Alex. F. (CI)"
     - git add .
     - git status
-    - git commit -m "Update repos"
+    - git commit -m "Update repos" || echo "Nothing to commit"
     - git remote set-url origin https://$GITHUB_TOKEN@github.com/elaon-de/repository.elaonde.git
     - git push origin main
     - git remote set-url origin git@git.elaon.de:alex/repository.elaonde.git
