@@ -51,6 +51,11 @@ process-changed-zip:
     - git config --global user.name "Alex. F. (CI)"
     - git add .
     - git status
+    - |
+      if git diff --cached --quiet; then
+        echo "Nothing to commit"
+        exit 0
+      fi
     - git commit -m "Update repos" || echo "Nothing to commit"
     - git remote set-url origin https://$GITHUB_TOKEN@github.com/elaon-de/repository.elaonde.git
     - git push origin main
