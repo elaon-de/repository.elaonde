@@ -38,7 +38,12 @@ for REPO in "$WEBROOT"/*/; do
         echo $REPOTOOL --datadir "$REPO" "${ZIP_ARGS[@]}"
         $REPOTOOL --datadir "$REPO" "${ZIP_ARGS[@]}"
         ls -la "$REPO"
+        echo "Checking Repo $REPO/addons.xml"
+        xmllint -noout $REPO/addons.xml
+        echo
     else
         echo "  No ZIPs found in repo $REPO_NAME"
     fi
+
+    
 done

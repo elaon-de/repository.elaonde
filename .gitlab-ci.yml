@@ -1,14 +1,18 @@
 stages:
   - test
   - release
+  - deploy
 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  PROD_ZIEL: /var/www/kodirepo.elaon.de/web/
 
 
 test:
   stage: test
   image: alpine:latest
   before_script:
-    - apk add --no-cache git git-lfs zip grep sed coreutils rsync libxml2-utils
+    - apk add --no-cache git libxml2-utils
   script:
     - echo "Linting reposource/repository.elaonde/addon.xml"
     - xmllint -noout reposource/repository.elaonde/addon.xml
@@ -16,11 +20,11 @@ test:
     - echo "Linting reposource/repository.elaondetesting/addon.xml"
     - xmllint -noout reposource/repository.elaondetesting/addon.xml
 
-    # - echo "Linting webroot/repo/addons.xml"
-    # - xmllint -noout webroot/repo/addons.xml
+    - echo "Linting webroot/repo/addons.xml"
+    - xmllint -noout webroot/repo/addons.xml
     
-    # - echo "Linting webroot/repo-testing/addons.xml"
-    # - xmllint -noout webroot/repo-testing/addons.xml
+    - echo "Linting webroot/repo-testing/addons.xml"
+    - xmllint -noout webroot/repo-testing/addons.xml
 
 
 process-changed-zip:
@@ -31,7 +35,7 @@ process-changed-zip:
     - when: never
   image: alpine:latest
   script:
-    - apk add --no-cache git python3 py3-pip bash openssh 
+    - apk add --no-cache git python3 py3-pip bash openssh libxml2-utils
     - eval $(ssh-agent -s)
     - echo "$SSH_DEPLOY_KEY" | base64 -d | ssh-add -
     - mkdir -p ~/.ssh
@@ -43,7 +47,6 @@ process-changed-zip:
     - git fetch origin main
     - git checkout -B main origin/main
     - ./tools/update_repository.sh
-    #- git diff
     - git branch
     - git config --global user.email "ci@git.elaon.de"
     - git config --global user.name "Alex. F. (CI)"
@@ -52,6 +55,24 @@ process-changed-zip:
     - git commit -m "Update repos"
     - git remote set-url origin https://$GITHUB_TOKEN@github.com/elaon-de/repository.elaonde.git
     - git push origin main
-    #- git remote set-url origin https://gitlab-ci-token:$CI_JOB_TOKEN@git.elaon.de/alex/repository.elaonde.git
     - git remote set-url origin git@git.elaon.de:alex/repository.elaonde.git
     - git push origin main
+
+deploy2prod:
+  stage: deploy
+  environment: production
+  script:
+    - "echo Vorherige Dateien:"
+    - ls -la $PROD_ZIEL
+    - echo Lösche alte Dateien am '${PROD_ZIEL}' ...
+    - rm -r ${PROD_ZIEL}* || echo "Keine Dateien vorhanden"
+    - echo Deploye Webseite nach '${PROD_ZIEL}' ...
+    - cp -r * $PROD_ZIEL
+    - echo "Passe Rechte auf (www-data) an..."
+    - "chown -R 33: $PROD_ZIEL"
+    - "echo Endstand am Ziel:"
+    - ls -la $PROD_ZIEL
+  only:
+    - main
+  tags:
+    - kodirepo
