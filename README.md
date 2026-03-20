@@ -4,9 +4,9 @@ Dieses Repository enthält:
 * plugin.video.gronkhtv
 
 
-Du kannst die Repository-ZIP-Datei aus dem Ordner **webroot** herunterladen oder die URL [https://kodirepo.elaon.de/repository.elaonde-1.0.0.zip](kodirepo.elaon.de/repository.elaonde-1.0.0.zip) verwenden.
+Du kannst die Repository-ZIP-Datei aus dem Ordner **webroot** herunterladen oder die URL [kodirepo.elaon.de/repository.elaonde-1.0.0.zip](https://kodirepo.elaon.de/repository.elaonde-1.0.0.zip) verwenden.
 
-Das **Testing-Repository** findest du unter folgender URL [https://kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip](kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip)
+Das **Testing-Repository** findest du unter folgender URL [kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip](https://kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip)
 
 
 ---
@@ -15,9 +15,9 @@ Das **Testing-Repository** findest du unter folgender URL [https://kodirepo.elao
 This repository contains:
 * plugin.video.gronkhtv
 
-You can download the repository ZIP file from the **webroot** folder or use the URL [https://kodirepo.elaon.de/repository.elaonde-1.0.0.zip](https://kodirepo.elaon.de/repository.elaonde-1.0.0.zip).
+You can download the repository ZIP file from the **webroot** folder or use the URL [kodirepo.elaon.de/repository.elaonde-1.0.0.zip](https://kodirepo.elaon.de/repository.elaonde-1.0.0.zip).
 
-The **testing repository** can be found at the following URL: [https://kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip](https://kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip)
+The **testing repository** can be found at the following URL: [kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip](https://kodirepo.elaon.de/repository.elaondetesting-1.0.0.zip)
 
 
 ### Repo and Plugin Icons
