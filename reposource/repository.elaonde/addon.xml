@@ -22,6 +22,7 @@
 		<source>https://github.com/elaon-de/repository.elaonde</source>
 		<assets>
 			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
 		</assets>
 	</extension>
 </addon>
