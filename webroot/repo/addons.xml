@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<addons><addon id="plugin.video.gronkhtv" name="Gronkh.tv" version="1.0.0" provider-name="Alexander F. (alex1702 | ElaonDE)">
+<addons><addon id="plugin.video.gronkhtv" name="Gronkh.tv" version="1.1.0" provider-name="Alexander F. (alex1702 | ElaonDE)">
     <requires>
         <import addon="xbmc.python" version="3.0.1" />
     </requires>
@@ -12,6 +12,8 @@
         <description lang="de_DE">Zugriff auf das Streamarchiv https://gronkh.tv</description>
         <description lang="en_GB">Access to the stream archive https://gronkh.tv</description>
         <news>
+        v1.1.0
+        - Change to new API
         v1.0.0
         - First Version
 		</news>
